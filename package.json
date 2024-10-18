@@ -1,0 +1,25 @@
+{
+  "name": "poc-child-process",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "seed": "tsx src/db/seed-csv.ts",
+    "seed:new": "tsx src/db/seed/index.ts",
+    "write:sqlite": "node --experimental-strip-types --experimental-sqlite src/db/writer-sqlite.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@faker-js/faker": "^9.0.3",
+    "@types/node": "^22.7.6",
+    "tsx": "^4.19.1"
+  },
+  "dependencies": {
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0"
+  }
+}
