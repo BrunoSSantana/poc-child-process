@@ -4,7 +4,7 @@ import { DatabaseSync } from "node:sqlite";
 import csv from "csv-parser";
 import { type PersonRecord, ROOT_DIRNAME } from "../main.ts";
 
-const database = new DatabaseSync("people2.db");
+const database = new DatabaseSync("people_optimized.db");
 
 type PersonRecordFromCSV = {
   ID: string;
