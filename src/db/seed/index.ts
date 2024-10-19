@@ -1,10 +1,10 @@
 import { fork } from "node:child_process";
 import * as fs from "node:fs";
 import * as path from "node:path";
-import { DIRNAME } from "../../main";
+import { ROOT_DIRNAME } from "../../main";
 
 const totalRecords = 1_000_000;
-const workers = 4; // Número de processos filhos
+const workers = 10;
 const recordsPerWorker = totalRecords / workers;
 
 async function mergeFiles() {
@@ -15,7 +15,7 @@ async function mergeFiles() {
     const workerFile = path.resolve(`people_part_${i}.csv`);
     const data = fs.readFileSync(workerFile);
     writeStream.write(data);
-    fs.unlinkSync(workerFile); // Remove os arquivos temporários
+    fs.unlinkSync(workerFile);
   }
 
   writeStream.end();
@@ -26,7 +26,7 @@ function startWorkers() {
   const processes: Promise<void>[] = [];
 
   for (let i = 1; i <= workers; i++) {
-    const worker = fork(path.resolve(DIRNAME, "worker.js"));
+    const worker = fork(path.resolve(ROOT_DIRNAME, "db/seed/worker.js"));
 
     worker.send({ workerId: i, records: recordsPerWorker });
     processes.push(
@@ -48,8 +48,8 @@ function startWorkers() {
 }
 
 console.time("CSV file generation");
+
 startWorkers()
-  .then(() => mergeFiles())
   .catch((err) => console.error("Error:", err))
-  .then(() => console.timeEnd("CSV file generation"))
-  .then(() => process.exit(0));
+  .then(() => mergeFiles())
+  .then(() => console.timeEnd("CSV file generation"));
