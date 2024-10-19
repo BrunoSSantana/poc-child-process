@@ -13,7 +13,14 @@ async function mergeFiles() {
 
   for (let i = 1; i <= workers; i++) {
     const workerFile = path.resolve(`people_part_${i}.csv`);
-    const data = fs.readFileSync(workerFile);
+    let data = fs.readFileSync(workerFile, 'utf-8');
+
+    if (i !== 1) {
+      const dataLines = data.split('\n');
+      dataLines.shift();
+      data = dataLines.join('\n');
+    }
+
     writeStream.write(data);
     fs.unlinkSync(workerFile);
   }
