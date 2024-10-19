@@ -105,9 +105,11 @@ function countAllRecords() {
 }
 
 async function main() {
+  console.time("SQLite");
   setupDatabase();
   await importCSVToSQLiteSync();
   countAllRecords();
+  console.timeEnd("SQLite");
 }
 
 main().catch(console.error);
