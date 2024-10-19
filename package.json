@@ -7,7 +7,8 @@
   "scripts": {
     "seed": "tsx src/db/seed-csv.ts",
     "seed:new": "tsx src/db/seed/index.ts",
-    "write:sqlite": "node --experimental-strip-types --experimental-sqlite src/db/writer-sqlite.ts"
+    "write:sqlite": "node --experimental-strip-types --experimental-sqlite src/db/write-data-sqlite.ts",
+    "write:sqlite:optimized": "node --experimental-strip-types --experimental-sqlite src/db/write-data-sqlite-optimize.ts"
   },
   "keywords": [],
   "author": "",
