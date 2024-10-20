@@ -57,4 +57,7 @@ async function generateCSV() {
   console.log("CSV file generation complete!");
 }
 
-generateCSV().catch((err) => console.error("Error generating CSV:", err));
+console.time("CSV file generation");
+generateCSV()
+  .catch((err) => console.error("Error generating CSV:", err))
+  .then(() => console.timeEnd("CSV file generation"));
