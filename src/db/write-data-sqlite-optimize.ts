@@ -61,7 +61,22 @@ function insertPersonRecordsBatch(people: PersonRecord[]) {
   database.exec("COMMIT");
 }
 
-export async function importCSVToSQLiteSync() {
+function mapRowToPersonRecord(row: PersonRecordFromCSV): PersonRecord {
+  return {
+    id: Number(row.ID),
+    firstName: row["First Name"],
+    lastName: row["Last Name"],
+    email: row.Email,
+    phoneNumber: row["Phone Number"],
+    address: row.Address,
+    city: row.City,
+    state: row.State,
+    zipCode: row["Zip Code"],
+    dateOfBirth: row["Date of Birth"],
+  };
+}
+
+async function importCSVToSQLiteSync() {
   const csvFilePath = path.resolve(ROOT_DIRNAME, "../people.csv");
   const people: PersonRecord[] = [];
 
@@ -69,23 +84,11 @@ export async function importCSVToSQLiteSync() {
     fs.createReadStream(csvFilePath)
       .pipe(csv())
       .on("data", (row: PersonRecordFromCSV) => {
-        const person: PersonRecord = {
-          id: Number(row.ID),
-          firstName: row["First Name"],
-          lastName: row["Last Name"],
-          email: row.Email,
-          phoneNumber: row["Phone Number"],
-          address: row.Address,
-          city: row.City,
-          state: row.State,
-          zipCode: row["Zip Code"],
-          dateOfBirth: row["Date of Birth"],
-        };
-
+        const person = mapRowToPersonRecord(row);
         people.push(person);
       })
       .on("end", () => {
-        if (people.length > 0) {
+        if (people.length) {
           insertPersonRecordsBatch(people);
         }
         console.log("CSV importado com sucesso!");
