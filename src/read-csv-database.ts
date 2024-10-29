@@ -1,7 +1,7 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import csv from "csv-parser";
-import { type PersonRecord, ROOT_DIRNAME } from "../main.ts";
+import { type PersonRecord, ROOT_DIRNAME } from "./main.ts";
 
 export async function* getAllPagedData(itemsPerPage: number, page = 0) {
   const csvFilePath = path.resolve(ROOT_DIRNAME, "../people.csv");

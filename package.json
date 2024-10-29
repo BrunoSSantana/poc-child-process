@@ -5,10 +5,10 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "seed": "tsx src/db/seed-csv.ts",
-    "seed:optimized": "tsx src/db/seed/index.ts",
-    "write:sqlite": "node --experimental-strip-types --experimental-sqlite src/db/write-data-sqlite.ts",
-    "write:sqlite:optimized": "node --experimental-strip-types --experimental-sqlite src/db/write-data-sqlite-optimize.ts"
+    "seed": "tsx src/csv-persistance/csv-persistance.ts",
+    "seed:optimized": "tsx src/csv-persistance/csv-persistance-worker/index.ts",
+    "write:sqlite": "node --experimental-strip-types --experimental-sqlite src/sqlite-persistance/write-data-sqlite.ts",
+    "write:sqlite:optimized": "node --experimental-strip-types --experimental-sqlite src/sqlite-persistance/write-data-sqlite-optimize.ts"
   },
   "keywords": [],
   "author": "",

@@ -20,7 +20,7 @@ type PersonRecordFromCSV = {
 };
 
 function setupDatabase() {
-  database.exec('DROP TABLE IF EXISTS people');
+  database.exec("DROP TABLE IF EXISTS people");
   database.exec(`
     CREATE TABLE people(
       id INTEGER PRIMARY KEY AUTOINCREMENT,

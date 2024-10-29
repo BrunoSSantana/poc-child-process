@@ -13,12 +13,12 @@ async function mergeFiles() {
 
   for (let i = 1; i <= workers; i++) {
     const workerFile = path.resolve(`people_part_${i}.csv`);
-    let data = fs.readFileSync(workerFile, 'utf-8');
+    let data = fs.readFileSync(workerFile, "utf-8");
 
     if (i !== 1) {
-      const dataLines = data.split('\n');
+      const dataLines = data.split("\n");
       dataLines.shift();
-      data = dataLines.join('\n');
+      data = dataLines.join("\n");
     }
 
     writeStream.write(data);
@@ -33,7 +33,7 @@ function startWorkers() {
   const processes: Promise<void>[] = [];
 
   for (let i = 1; i <= workers; i++) {
-    const worker = fork(path.resolve(ROOT_DIRNAME, "db/seed/worker.js"));
+    const worker = fork(path.resolve(ROOT_DIRNAME, "csv-persistance/csv-persistance-worker/worker.js"));
 
     worker.send({ workerId: i, records: recordsPerWorker });
     processes.push(
