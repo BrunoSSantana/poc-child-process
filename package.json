@@ -8,7 +8,7 @@
     "seed": "tsx src/csv-persistance/csv-persistance.ts",
     "seed:optimized": "tsx src/csv-persistance/csv-persistance-worker/index.ts",
     "write:sqlite": "node --experimental-strip-types --experimental-sqlite src/sqlite-persistance/write-data-sqlite.ts",
-    "write:sqlite:optimized": "node --experimental-strip-types --experimental-sqlite src/sqlite-persistance/write-data-sqlite-optimize.ts"
+    "write:sqlite:optimized": "node --experimental-strip-types --experimental-sqlite --no-warnings src/sqlite-persistance/write-data-sqlite-optimized.ts"
   },
   "keywords": [],
   "author": "",

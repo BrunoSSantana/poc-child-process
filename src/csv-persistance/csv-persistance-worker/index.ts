@@ -33,18 +33,18 @@ function startWorkers() {
   const processes: Promise<void>[] = [];
 
   for (let i = 1; i <= workers; i++) {
-    const worker = fork(path.resolve(ROOT_DIRNAME, "csv-persistance/csv-persistance-worker/worker.js"));
+    const child = fork(path.resolve(ROOT_DIRNAME, "csv-persistance/csv-persistance-worker/worker.js"));
 
-    worker.send({ workerId: i, records: recordsPerWorker });
+    child.send({ workerId: i, records: recordsPerWorker });
     processes.push(
       new Promise<void>((resolve, reject) => {
-        worker.on("message", (msg) => {
+        child.on("message", (msg) => {
           if (msg === "done") {
             resolve();
           }
         });
 
-        worker.on("error", (err) => {
+        child.on("error", (err) => {
           reject(err);
         });
       }),

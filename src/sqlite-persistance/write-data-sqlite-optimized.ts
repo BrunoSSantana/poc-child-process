@@ -4,7 +4,7 @@ import { DatabaseSync } from "node:sqlite";
 import csv from "csv-parser";
 import { type PersonRecord, ROOT_DIRNAME } from "../main.ts";
 
-const database = new DatabaseSync("people_optimized.db");
+const BATCH_SIZE = 1000;
 
 type PersonRecordFromCSV = {
   ID: string;
@@ -18,6 +18,8 @@ type PersonRecordFromCSV = {
   "Zip Code": string;
   "Date of Birth": string;
 };
+
+const database = new DatabaseSync("people_optimized.db");
 
 function setupDatabase() {
   database.exec("DROP TABLE IF EXISTS people");
