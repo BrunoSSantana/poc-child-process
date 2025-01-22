@@ -1,6 +1,7 @@
+import type { PersonRecord } from "@/main.ts";
+import { logger } from "@/packages/logs/index.ts";
 import { faker, th } from "@faker-js/faker";
 import { createObjectCsvWriter } from "csv-writer";
-import type { PersonRecord } from "../main";
 
 const csvWriter = createObjectCsvWriter({
   path: "people.csv",
@@ -45,7 +46,7 @@ async function generateCSV() {
 
     if (i % 10000 === 0) {
       await csvWriter.writeRecords(records);
-      console.log(`Written ${i} records`);
+      logger.log(`Written ${i} records`);
       records.length = 0;
     }
   }
@@ -54,7 +55,7 @@ async function generateCSV() {
     await csvWriter.writeRecords(records);
   }
 
-  console.log("CSV file generation complete!");
+  logger.log("CSV file generation complete!");
 }
 
 console.time("CSV file generation");

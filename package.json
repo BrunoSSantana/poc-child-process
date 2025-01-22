@@ -5,22 +5,24 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "seed": "tsx src/csv-persistance/csv-persistance.ts",
-    "seed:optimized": "tsx src/csv-persistance/csv-persistance-worker/index.ts",
-    "write:sqlite": "node --experimental-strip-types --experimental-sqlite src/sqlite-persistance/write-data-sqlite.ts",
-    "write:sqlite:optimized": "node --experimental-strip-types --experimental-sqlite --no-warnings src/sqlite-persistance/write-data-sqlite-optimized.ts"
+    "seed": "tsx src/processes/csv-persistance/csv-persistance.ts",
+    "seed:optimized": "tsx src/processes/csv-persistance/csv-persistance-worker/index.ts",
+    "write:sqlite": "node --experimental-strip-types --experimental-sqlite src/processes/sqlite-persistance/write-data-sqlite.ts",
+    "write:sqlite:optimized": "node --experimental-strip-types --experimental-sqlite --no-warnings src/processes/sqlite-persistance/write-data-sqlite-optimized.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@faker-js/faker": "^9.0.3",
-    "@types/node": "^22.7.6",
-    "tsx": "^4.19.1"
+    "@faker-js/faker": "9.0.3",
+    "@types/node": "22.7.6",
+    "tsx": "4.19.1",
+    "typescript": "5.7.3"
   },
   "dependencies": {
-    "csv-parser": "^3.0.0",
-    "csv-writer": "^1.6.0"
+    "csv-parser": "3.0.0",
+    "csv-writer": "1.6.0",
+    "pino": "9.6.0"
   }
 }

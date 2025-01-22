@@ -1,7 +1,8 @@
 import { fork } from "node:child_process";
 import * as fs from "node:fs";
 import * as path from "node:path";
-import { ROOT_DIRNAME } from "../../main";
+import { logger } from "@/packages/logs/index.ts";
+import { ROOT_DIRNAME } from "@/main.ts";
 
 const totalRecords = 1_000_000;
 const workers = 10;
@@ -26,14 +27,19 @@ async function mergeFiles() {
   }
 
   writeStream.end();
-  console.log("CSV file merging complete!");
+  logger.log("CSV file merging complete!");
 }
 
 function startWorkers() {
   const processes: Promise<void>[] = [];
 
   for (let i = 1; i <= workers; i++) {
-    const child = fork(path.resolve(ROOT_DIRNAME, "csv-persistance/csv-persistance-worker/worker.js"));
+    const child = fork(
+      path.resolve(
+        ROOT_DIRNAME,
+        "processes/csv-persistance/csv-persistance-worker/worker.js",
+      ),
+    );
 
     child.send({ workerId: i, records: recordsPerWorker });
     processes.push(
