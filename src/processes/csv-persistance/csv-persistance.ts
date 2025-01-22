@@ -1,5 +1,5 @@
-import type { PersonRecord } from "@/main.ts";
-import { logger } from "@/packages/logs/index.ts";
+import type { PersonRecord } from "../../main.ts";
+import { logger } from "../../packages/logs/index.ts";
 import { faker, th } from "@faker-js/faker";
 import { createObjectCsvWriter } from "csv-writer";
 

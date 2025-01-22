@@ -1,7 +1,7 @@
 import * as path from "node:path";
 import { faker } from "@faker-js/faker";
 import { createObjectCsvWriter } from "csv-writer";
-import type { PersonRecord } from "@/main.ts";
+import type { PersonRecord } from "../../../main.ts";
 
 function generateFakePerson(id: number) {
   return {

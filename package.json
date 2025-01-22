@@ -5,10 +5,14 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "seed": "tsx src/processes/csv-persistance/csv-persistance.ts",
+    "seed": "node src/processes/csv-persistance/csv-persistance.ts",
     "seed:optimized": "tsx src/processes/csv-persistance/csv-persistance-worker/index.ts",
     "write:sqlite": "node --experimental-strip-types --experimental-sqlite src/processes/sqlite-persistance/write-data-sqlite.ts",
-    "write:sqlite:optimized": "node --experimental-strip-types --experimental-sqlite --no-warnings src/processes/sqlite-persistance/write-data-sqlite-optimized.ts"
+    "write:sqlite:optimized": "node --experimental-strip-types --experimental-sqlite --no-warnings src/processes/sqlite-persistance/write-data-sqlite-optimized.ts",
+    "seed:doctor": "clinic doctor -- node src/processes/csv-persistance/csv-persistance.ts --trace-deprecation",
+    "seed:optimized:doctor": "clinic doctor -- node src/processes/csv-persistance/csv-persistance-worker/index.ts --trace-deprecation",
+    "write:sqlite:doctor": "clinic doctor -- node --experimental-strip-types --experimental-sqlite src/processes/sqlite-persistance/write-data-sqlite.ts --trace-deprecation",
+    "write:sqlite:optimized:doctor": "clinic doctor -- node --experimental-strip-types --experimental-sqlite --no-warnings src/processes/sqlite-persistance/write-data-sqlite-optimized.ts --trace-deprecation"
   },
   "keywords": [],
   "author": "",

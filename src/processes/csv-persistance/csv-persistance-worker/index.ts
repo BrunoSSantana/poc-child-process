@@ -1,8 +1,8 @@
 import { fork } from "node:child_process";
 import * as fs from "node:fs";
 import * as path from "node:path";
-import { logger } from "@/packages/logs/index.ts";
-import { ROOT_DIRNAME } from "@/main.ts";
+import { logger } from "../../../packages/logs/index.ts";
+import { ROOT_DIRNAME } from "../../../main.ts";
 
 const totalRecords = 1_000_000;
 const workers = 10;
