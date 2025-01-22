@@ -87,6 +87,11 @@ async function importCSVToSQLiteSync() {
       .on("data", (row: PersonRecordFromCSV) => {
         const person = mapRowToPersonRecord(row);
         people.push(person);
+
+        /* if (people.length === 1000) {
+          insertPersonRecordsBatch(people);
+          people.length = 0;
+        } */
       })
       .on("end", () => {
         if (people.length) {
