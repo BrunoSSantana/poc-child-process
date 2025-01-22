@@ -1,8 +1,8 @@
 import { fork } from "node:child_process";
 import * as fs from "node:fs";
 import * as path from "node:path";
-import { logger } from "../../../packages/logs/index.ts";
 import { ROOT_DIRNAME } from "../../../main.ts";
+import { logger } from "../../../packages/logs/index.ts";
 
 const totalRecords = 1_000_000;
 const workers = 10;
@@ -37,7 +37,7 @@ function startWorkers() {
     const child = fork(
       path.resolve(
         ROOT_DIRNAME,
-        "processes/csv-persistance/csv-persistance-worker/worker.js",
+        "processes/csv-persistance/csv-persistance-worker/worker.ts",
       ),
     );
 
@@ -62,7 +62,8 @@ function startWorkers() {
 
 console.time("CSV file generation");
 
-startWorkers()
-  .catch((err) => console.error("Error:", err))
-  .then(() => mergeFiles())
-  .then(() => console.timeEnd("CSV file generation"));
+await startWorkers();
+await mergeFiles();
+
+console.timeEnd("CSV file generation");
+process.exit(0);
